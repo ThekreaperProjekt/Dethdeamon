@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DethDeamon — Safe Demo</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="app">
+    <header>
+      <h1>DethDeamon — Safe Demo</h1>
+      <div class="toggles">
+        <label><input id="pgToggle" type="checkbox" checked> PG Mode (safe)</label>
+        <button id="jamToggle">Start Jam</button>
+        <button id="micToggle">Start Mic</button>
+      </div>
+    </header>
+
+    <section id="chatArea" aria-live="polite">
+      <div id="chat" role="log"></div>
+    </section>
+
+    <footer>
+      <input id="input" placeholder="Type a message and press Enter" autocomplete="off" />
+      <small>This demo keeps content safe and family-friendly. See CONTENT_WARNING.md for details.</small>
+    </footer>
+  </main>
+
+  <!-- Tone.js is optional, we use a tiny WebAudio jam engine in app.js. -->
+  <script src="app.js"></script>
+  <script>
+    // Service worker registration for PWA/offline
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js').catch(()=>{/* ignore */});
+    }
+  </script>
+</body>
+</html>
