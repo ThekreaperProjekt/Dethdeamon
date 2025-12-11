@@ -1,0 +1,28 @@
+/* Minimal, readable styling for the safe demo */
+:root {
+  --bg: #050505;
+  --panel: #0f0f0f;
+  --accent: #00c08b;
+  --muted: #9aa0a6;
+  --text: #e9fff6;
+}
+* { box-sizing: border-box; }
+html,body { height:100%; margin:0; background:var(--bg); color:var(--text); font-family:system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+#app { max-width:920px; margin:18px auto; display:flex; flex-direction:column; min-height:80vh; gap:12px; padding:12px; }
+header { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+h1 { margin:0; font-size:1.1rem; color:var(--accent); }
+.toggles { display:flex; gap:10px; align-items:center; }
+.toggles button { background:var(--panel); border:1px solid #222; color:var(--text); padding:6px 10px; border-radius:6px; cursor:pointer; }
+#chatArea { background:var(--panel); border:1px solid #111; padding:12px; border-radius:8px; flex:1; overflow:auto; }
+#chat { display:flex; flex-direction:column; gap:8px; }
+.msg { padding:8px 10px; border-radius:8px; max-width:82%; }
+.msg.you { align-self:flex-end; background:#062a2a; color:#b8fff0; }
+.msg.bot { align-self:flex-start; background:#072015; color:#c8ffe8; }
+footer { display:flex; flex-direction:column; gap:8px; }
+#input { padding:10px; border-radius:8px; border:1px solid #111; background:#070707; color:var(--text); outline:none; }
+small { color:var(--muted); }
+button:active { transform:translateY(1px); }
+@media (max-width:560px) {
+  h1 { font-size:1rem; }
+  .toggles { flex-direction:column; align-items:flex-end; }
+}
