@@ -1,0 +1,286 @@
+/* Custom dark theme with red accents and visual effects */
+
+/* Root variables for easy colour control */
+:root {
+  --bg: #000000;           /* darkest background */
+  --panel: #121212;       /* dark grey panels */
+  --accent: #ff4d4d;      /* light red accents for outlines and text */
+  --muted: #666666;       /* muted grey for small text */
+  --text: #ffcccc;        /* pale red/pinkish for general text */
+}
+
+/* Global reset and base styles */
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+#app {
+  max-width: 920px;
+  margin: 18px auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 80vh;
+  gap: 12px;
+  padding: 12px;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+h1 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+.toggles {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.toggles button {
+  background: var(--panel);
+  border: 1px solid #222;
+  color: var(--text);
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+#chatArea {
+  background: var(--panel);
+  border: 1px solid #111;
+  padding: 12px;
+  border-radius: 8px;
+  flex: 1;
+  overflow: auto;
+}
+#chat {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.msg {
+  padding: 8px 10px;
+  border-radius: 8px;
+  max-width: 82%;
+}
+.msg.you {
+  align-self: flex-end;
+  background: #1e1e1e;
+  color: #ff9999;
+  border: 1px solid var(--accent);
+  animation: pulse 4s ease-in-out infinite;
+}
+.msg.bot {
+  align-self: flex-start;
+  background: #2b1111;
+  color: #ffb3b3;
+  border: 1px solid var(--accent);
+  animation: flicker 5s infinite;
+}
+footer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+#input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #111;
+  background: #070707;
+  color: var(--text);
+  outline: none;
+}
+small {
+  color: var(--muted);
+}
+button:active {
+  transform: translateY(1px);
+}
+
+/* Responsive typography and layout tweaks */
+@media (max-width: 560px) {
+  h1 {
+    font-size: 1rem;
+  }
+  .toggles {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
+
+/* === Visual Effects === */
+
+/* Glitch effect on text: apply to any element with class `.glitch` */
+.glitch {
+  position: relative;
+  color: var(--accent);
+  overflow: hidden;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+.glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 rgba(255, 77, 77, 0.8);
+  animation: glitch-before 2s infinite linear alternate-reverse;
+}
+.glitch::after {
+  left: -2px;
+  text-shadow: -2px 0 rgba(255, 102, 102, 0.8);
+  animation: glitch-after 3s infinite linear alternate-reverse;
+}
+@keyframes glitch-before {
+  0% {
+    clip-path: inset(0 0 90% 0);
+  }
+  20% {
+    clip-path: inset(10% 0 70% 0);
+  }
+  40% {
+    clip-path: inset(20% 0 60% 0);
+  }
+  60% {
+    clip-path: inset(30% 0 40% 0);
+  }
+  80% {
+    clip-path: inset(40% 0 20% 0);
+  }
+  100% {
+    clip-path: inset(50% 0 10% 0);
+  }
+}
+@keyframes glitch-after {
+  0% {
+    clip-path: inset(80% 0 0 0);
+  }
+  20% {
+    clip-path: inset(60% 0 20% 0);
+  }
+  40% {
+    clip-path: inset(40% 0 30% 0);
+  }
+  60% {
+    clip-path: inset(20% 0 50% 0);
+  }
+  80% {
+    clip-path: inset(10% 0 60% 0);
+  }
+  100% {
+    clip-path: inset(0 0 80% 0);
+  }
+}
+
+/* Smoke effect: use a pseudo-element to simulate drifting smoke */
+.smoke-container {
+  position: relative;
+  overflow: hidden;
+}
+.smoke-container::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -50px;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, rgba(255, 77, 77, 0.6) 0%, rgba(255, 77, 77, 0) 70%);
+  animation: smoke 6s linear infinite;
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+@keyframes smoke {
+  0% {
+    transform: translate(-50%, 0) scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(-50%, -200%) scale(3);
+    opacity: 0;
+  }
+}
+
+/* Pulse effect: subtle glow pulsing around an element */
+.pulse {
+  position: relative;
+  animation: pulse 3s ease-in-out infinite;
+}
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 20px 20px rgba(255, 77, 77, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 77, 77, 0);
+  }
+}
+
+/* Flicker effect: randomised opacity to simulate flickering light */
+.flicker {
+  animation: flicker 4s linear infinite;
+}
+@keyframes flicker {
+  0% {
+    opacity: 1;
+  }
+  5% {
+    opacity: 0.5;
+  }
+  10% {
+    opacity: 1;
+  }
+  15% {
+    opacity: 0.3;
+  }
+  20% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 0.7;
+  }
+  40% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  60% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.6;
+  }
+  80% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Utility: red outline effect for any element */
+.outline-red {
+  border: 2px solid var(--accent);
+  color: var(--accent);
+}
